@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use DateTime;
 use DateTimeZone;
 
-class PnrController extends Controller
+class PnrApiController extends Controller
 {
     public function convertPnr(Request $request)
     {

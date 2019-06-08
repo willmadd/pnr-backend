@@ -17,6 +17,10 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('api');
+            $table->string('iatacode');
+            $table->string('address_1');
+            $table->string('address_2');
+            $table->string('city');
             $table->string('country');
             $table->string('phone');
             $table->string('agencyname');
@@ -25,6 +29,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('active')->default(false);
             $table->string('activation_token');
+            $table->string('signup_day');
+            $table->string('signup_month');
+            $table->string('signup_year');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

@@ -20,30 +20,43 @@ class AuthController extends Controller
     public function signup(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
+            'contactperson' => 'required|string',
+            'agencyname' => 'required|string',
+            'iatacode' => 'string',
+            'addressone' => 'required|string',
+            'addresstwo' => 'string',
+            'city' => 'required|string',
+            'country' => 'required|string',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed',
-            'agencyname' => 'required|string',
             'phone' => 'required|string',
-            'country' => 'required|string',
-            'api' => 'required|string',
+            'apiOption' => 'required|string',
         ]);
         $user = new User([
-            'name' => $request->name,
+            'name' => $request->contactperson,
+            'agencyname' => $request->agencyname,
+            'iatacode' => $request->iatacode,
+            'address_1' => $request->addressone,
+            'address_2' => $request->addresstwo,
+            'city'=>$request->city,
+            'country' => $request->country,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'agencyname' => $request->agencyname,
             'phone' => $request->phone,
-            'country' => $request->country,
-            'api' => $request->api,
-            'activation_token' => str_random(60)
+            'api' => $request->apiOption,
+            'activation_token' => str_random(60),
+            'signup_day' => $request->signupdateday,
+            'signup_month' => $request->signupdatemonth,
+            'signup_year' => $request->signupdateyear,
+            
         ]);
         $user->save();
 
         $user->notify(new SignupActivate($user));
 
         return response()->json([
-            'message' => 'Successfully created user!'
+            'message' => 'Successfully created user!',
+            'user_id' => 'tba'
         ], 201);
     }
   
